@@ -21,7 +21,9 @@ public class FilmService {
     public List<Film> getAllFilms() {
         return filmRepository.findAll();
     }
-
+    public long getNumberOfFilms(){
+        return getAllFilms().size();
+    }
     public Film getFilmById(Long id) {
         return filmRepository.findById(id).orElse(null);
     }
