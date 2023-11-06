@@ -47,7 +47,7 @@ public class FilmController {
         filmService.deleteFilm(id);
     }
 
-    @GetMapping("/swagger-ui.html")
+    @GetMapping("/swagger-ui")
     public String swaggerUi(HttpServletResponse response) throws IOException {
         response.sendRedirect("/swagger-ui/index.html?url=/v2/api-docs");
         return null;
