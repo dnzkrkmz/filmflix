@@ -6,5 +6,5 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EntityScan("com.ax.library.domain")
 public class JpaConfig {
-    // ...
+
 }

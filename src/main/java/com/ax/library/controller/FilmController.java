@@ -1,6 +1,8 @@
 package com.ax.library.controller;
 import com.ax.library.domain.Film;
 import com.ax.library.service.FilmService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.Page;
@@ -15,6 +17,7 @@ import java.util.List;
 @RequestMapping("/")
 public class FilmController {
     private final FilmService filmService;
+    private static final Logger logger = LoggerFactory.getLogger(FilmController.class);
 
     @Autowired
     public FilmController(FilmService filmService) {
@@ -23,7 +26,10 @@ public class FilmController {
     // can be used /films?page=0&size=10 for the first page
     @GetMapping("/films")
     public Page<Film> getAllFilms(Pageable pageable) {
-        return filmService.getAllFilms(pageable);
+        logger.info("Films requested by page.");
+        Page<Film> films=filmService.getAllFilms(pageable);
+        logger.debug("Returned {} films:",films.getSize());
+        return films;
     }
 
     @GetMapping("/film/{id}")
@@ -38,12 +44,10 @@ public class FilmController {
     public Film createFilm(@RequestBody Film film) {
         return filmService.createFilm(film);
     }
-
     @PutMapping("/film/{id}")
     public Film updateFilm(@PathVariable Long id, @RequestBody Film updatedFilm) {
         return filmService.updateFilm(id, updatedFilm);
     }
-
     @DeleteMapping("/film/{id}")
     public void deleteFilm(@PathVariable Long id) {
         filmService.deleteFilm(id);
