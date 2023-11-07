@@ -3,6 +3,8 @@ import com.ax.library.domain.Film;
 import com.ax.library.service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -18,10 +20,10 @@ public class FilmController {
     public FilmController(FilmService filmService) {
         this.filmService = filmService;
     }
-
+    // can be used /films?page=0&size=10 for the first page
     @GetMapping("/films")
-    public List<Film> getAllFilms() {
-        return filmService.getAllFilms();
+    public Page<Film> getAllFilms(Pageable pageable) {
+        return filmService.getAllFilms(pageable);
     }
 
     @GetMapping("/film/{id}")

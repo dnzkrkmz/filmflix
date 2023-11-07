@@ -4,6 +4,8 @@ package com.ax.library.service;
 import com.ax.library.domain.Film;
 import com.ax.library.repository.FilmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,9 @@ public class FilmService {
         this.filmRepository = filmRepository;
     }
 
+    public Page<Film> getAllFilms(Pageable pageable) {
+        return filmRepository.findAll(pageable);
+    }
     public List<Film> getAllFilms() {
         return filmRepository.findAll();
     }
