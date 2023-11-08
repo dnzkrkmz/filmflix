@@ -1,8 +1,9 @@
 package com.ax.library.controller;
 import com.ax.library.domain.Film;
 import com.ax.library.service.FilmService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.Page;
@@ -17,14 +18,14 @@ import java.util.List;
 @RequestMapping("/")
 public class FilmController {
     private final FilmService filmService;
-    private static final Logger logger = LoggerFactory.getLogger(FilmController.class);
+    private static final Logger logger = LogManager.getLogger(FilmController.class);
 
     @Autowired
     public FilmController(FilmService filmService) {
         this.filmService = filmService;
     }
     // can be used /films?page=0&size=10 for the first page
-    @GetMapping("/films")
+    @GetMapping()
     public Page<Film> getAllFilms(Pageable pageable) {
         logger.info("Films requested by page.");
         Page<Film> films=filmService.getAllFilms(pageable);
@@ -53,9 +54,5 @@ public class FilmController {
         filmService.deleteFilm(id);
     }
 
-    @GetMapping("/swagger-ui")
-    public String swaggerUi(HttpServletResponse response) throws IOException {
-        response.sendRedirect("/swagger-ui/index.html?url=/v2/api-docs");
-        return null;
-    }
+
 }

@@ -18,11 +18,11 @@ public class SwaggerConfig {
         return
                 new Docket(DocumentationType.SWAGGER_2)
                         .select()
-                        .apis(RequestHandlerSelectors.any())
+                        .apis(RequestHandlerSelectors.basePackage("com.ax.library.controller"))
                         .paths(PathSelectors.any())
-                        .build();
+                        .build().apiInfo(apiInfo());
     }
-    private ApiInfo apiInfo() {
+  private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("Film API")
                 .description("Film API Documentation")

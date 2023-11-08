@@ -3,8 +3,8 @@ package com.ax.library.service;
 
 import com.ax.library.domain.Film;
 import com.ax.library.repository.FilmRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class FilmService {
     private final FilmRepository filmRepository;
-    private static final Logger logger = LoggerFactory.getLogger(FilmService.class);
+    private static final Logger logger = LogManager.getLogger(FilmService.class);
 
     @Autowired
     public FilmService(FilmRepository filmRepository) {
